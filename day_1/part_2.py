@@ -1,30 +1,19 @@
-# read in input file
-# split on the empty string
-# for the second array don't store in a list but in a dictionary
-# add key if not present otherwise add 1 
+from collections import Counter
 
 def read_input(file_path):
 
-    a, b = [], {}
+    a, b = [], Counter()
 
     with open(file_path, 'r') as f:
         for line in f:
-            data = line.split()
-            a.append(data[0])
-        
-            if (data[1]) in b:
-                b[(data[1])] += 1
-            else:
-                b[(data[1])] = 1
+            x, y = line.split()
+            a.append(x)
+            b[y] += 1
 
     return a, b
 
 def calculate_similarity_score(a,b):
-    score = 0
-    for item in a:
-        if item in b:
-            score += int(item) * b[item]
-    return score
+    return sum(int(x) * b[x] for x in a if x in b)
 
 
 if __name__ == "__main__":
