@@ -1,9 +1,3 @@
-# Combinatorial search problemt result
-# Backtracking combined with brute force enumeration of operator placements
-# Use a recursive function to explore all possible ways of placing operators between the numbers.
-# Compute the partial result of the equation so far.
-# If the partial result exceeds the target value (and further operations cannot correct it), prune the branch (backtrack).
-
 def read_input(file_path):
 
     a, b = [], []
@@ -28,7 +22,8 @@ def is_combination_possible(numbers, target):
         return (
             # if either one is True overall is returned True
             backtrack(index + 1, current_value + next_value) or  # Add
-            backtrack(index + 1, current_value * next_value)     # Multiply
+            backtrack(index + 1, current_value * next_value) or    # Multiply
+            backtrack(index + 1, int(str(current_value) + str(next_value)))   # Concatenate
         )
     
     # Start backtracking from the second number, with the first as the initial value
